@@ -1,6 +1,6 @@
+ARG BASE_IMAGE=illumidesk/jupyterhub:py3.8
 FROM jupyter/base-notebook:b2562c469cdd AS builder
 
-ARG BASE_IMAGE=illumidesk/jupyterhub:py3.8
 FROM $BASE_IMAGE
 
 USER root
