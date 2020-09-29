@@ -3,14 +3,14 @@
 # Create and use roles and service accounts on an RBAC enabled cluster.
 rbac:
     enabled: true
-  
+
 jupyterhub:
 # Helm config for jupyterhub goes here
 # See https://github.com/jupyterhub/zero-to-jupyterhub-k8s/blob/master/jupyterhub/values.yaml
     hub:
       image:
-        name: illumidesk/k8s-hub
-        tag: latest
+        name: sebastianmc/k8s-hub
+        tag: py3.8
       shutdownOnLogout: true
     proxy:
       https:
@@ -19,16 +19,15 @@ jupyterhub:
       service:
         ports:
           nodePort: 8080
-        type: ClusterIP
     singleuser:
       cmd: start-singleuser.sh
       extraEnv:
         CHOWN_HOME: 'yes'
         Editor: vim
       fsGid: 0
-      uid: 0
+      # uid: 0
       image:
-        name: illumidesk/base-notebook
+        name: illumidesk/grader-notebook
         tag: latest
     # singleuser:
     #   image:
@@ -52,14 +51,3 @@ jupyterhub:
     #   service:
     #     # Not meant to be exposed to the public directly with this setup
     #     type: ClusterIP
-awsAccessKey: ''
-awsSecretToken: ''
-clusterName: cluster
-clusterVPC: vpc-XXXXXXXXXXXXX
-awsRegion: us-east-2
-host: jhub.example.com
-subnets: subnet-XXXXXXXXXXXXX,subnet-XXXXXXXXXXXXX,subnet-XXXXXXXXXXXXX
-ingressTags: Environment=dev,Team=test
-domainFilter: example.com
-txtOwnerID: illumidesk
-controllerName: alb-ingress-controller
